@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Xos-log4cxx"
+	>
+    
+    <!--===============================================-->
+    
+    <UserMacro
+		Name="LOG4CXX_GROUP"
+		Value="apache/log4cxx/"
+	/>
+    <UserMacro
+		Name="LOG4CXX_NAME"
+		Value="apache-log4cxx-"
+	/>
+    <UserMacro
+		Name="LOG4CXX_VERSION"
+		Value="0.10.0"
+	/>
+    <UserMacro
+		Name="LOG4CXX_DIR"
+		Value="$(LOG4CXX_GROUP)$(LOG4CXX_NAME)$(LOG4CXX_VERSION)"
+	/>
+    <UserMacro
+		Name="LOG4CXX_SOURCE_DIR"
+		Value="$(SOURCE_ROOT_DIR)/$(LOG4CXX_DIR)"
+	/>
+    <UserMacro
+		Name="LOG4CXX_BUILD_DIR"
+		Value="$(SOURCE_BUILD_DIR)/$(LOG4CXX_DIR)"
+	/>
+	
+    <UserMacro
+		Name="LOG4CXX_BUILD"
+		Value="$(LOG4CXX_BUILD_DIR)/projects/$(ConfigurationName)"
+	/>
+    <UserMacro
+		Name="LOG4CXX_LIB"
+		Value="$(LOG4CXX_BUILD)"
+	/>
+	
+    <UserMacro
+		Name="LOG4CXX_DEFINES"
+		Value="LOG4CXX"
+	/>
+
+    <UserMacro
+		Name="LOG4CXX_INCLUDE_DIRS"
+		Value="$(LOG4CXX_SOURCE_DIR)/src/main/include"
+	/>
+    <UserMacro
+		Name="LOG4CXX_LIB_DIRS"
+		Value="$(LOG4CXX_LIB)"
+	/>
+    <UserMacro
+		Name="LOG4CXX_LIBS"
+		Value="log4cxx.lib"
+	/>
+	
+    <!--===============================================-->
+    
+</VisualStudioPropertySheet>

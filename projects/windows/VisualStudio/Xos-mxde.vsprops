@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="Xos-mxde">
+    
+    <!--===============================================-->
+    
+    <UserMacro
+        Name="MXDE_GROUP"
+        Value=""
+    />
+    <UserMacro
+        Name="MXDE_NAME"
+        Value="mxde"
+    />
+    <UserMacro
+        Name="MXDE_VERSION"
+        Value=""
+    />
+    <UserMacro
+        Name="MXDE_DIR"
+        Value="$(MXDE_GROUP)$(MXDE_NAME)$(MXDE_VERSION)"
+    />
+
+    <UserMacro
+        Name="MXDE_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(MXDE_DIR)/c"
+    />
+    <UserMacro
+        Name="MXDE_BUILD_DIR"
+        Value="$(MXDE_SOURCE_DIR)"
+    />
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="MXDE_BUILD"
+        Value="$(MXDE_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="MXDE_LIB"
+        Value="$(MXDE_BUILD)/lib"
+    />
+    <UserMacro
+        Name="MXDE_BIN"
+        Value="$(MXDE_BUILD)/bin"
+    />
+    
+    <UserMacro
+        Name="MXDE_CIMAGE_INCLUDE_DIRS"
+        Value="$(MXDE_SOURCE_DIR)/src/clib/clibc/cgiflib;$(MXDE_SOURCE_DIR)/src/clib/clibc/clibbmp;$(MXDE_SOURCE_DIR)/src/clib/clibc/clibjpeg;$(MXDE_SOURCE_DIR)/src/clib/clibc/clibpng;$(MXDE_SOURCE_DIR)/src/clib/clibc/clibtiff;$(MXDE_SOURCE_DIR)/src/clib/cimage"
+    />
+    <UserMacro
+        Name="MXDE_CCRYPTO_INCLUDE_DIRS"
+        Value="$(MXDE_SOURCE_DIR)/src/clib/ccrypto;$(MXDE_SOURCE_DIR)/src/clib/cmpint/bn;$(MXDE_SOURCE_DIR)/src/clib/cmpint/mp"
+    />
+    <UserMacro
+        Name="MXDE_COS_INCLUDE_DIRS"
+        Value="$(MXDE_SOURCE_DIR)/src/clib/cos/cplatform;$(MXDE_SOURCE_DIR)/src/clib/cos;$(MXDE_SOURCE_DIR)/src/clib/cbase"
+    />
+    <UserMacro
+        Name="MXDE_INCLUDE_DIRS"
+        Value="$(MXDE_CIMAGE_INCLUDE_DIRS);$(MXDE_CCRYPTO_INCLUDE_DIRS);$(MXDE_COS_INCLUDE_DIRS)"
+    />
+    <UserMacro
+        Name="MXDE_LIB_DIRS"
+        Value="$(MXDE_LIB)"
+    />
+    <UserMacro
+        Name="MXDE_LIBS"
+        Value=""
+    />
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="XOS_MXDE_INCLUDE_DIRS"
+        Value="$(XOS_SOURCE_DIR)/xos/mxde;$(MXDE_INCLUDE_DIRS)"
+    />
+    
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Xos-vcversion"
+	>
+    
+    <UserMacro
+		Name="VCVersion"
+		Value="vc9"
+	/>
+    <UserMacro
+		Name="VSVersion"
+		Value="VS2008"
+	/>
+
+</VisualStudioPropertySheet>

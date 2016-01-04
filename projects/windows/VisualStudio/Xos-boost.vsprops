@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Xos-boost"
+	>
+    
+    <!--===============================================-->
+    
+    <UserMacro
+		Name="BOOST_GROUP"
+		Value="frameworks/boost/"
+	/>
+    <UserMacro
+		Name="BOOST_NAME"
+		Value="boost"
+	/>
+    <UserMacro
+		Name="BOOST_VERSION"
+		Value="_1_47_0"
+	/>
+    <UserMacro
+		Name="BOOST_DIR"
+		Value="$(BOOST_GROUP)$(BOOST_NAME)$(BOOST_VERSION)"
+	/>
+    <UserMacro
+		Name="BOOST_SOURCE_DIR"
+		Value="$(SOURCE_ROOT_DIR)/$(BOOST_DIR)"
+	/>
+    <UserMacro
+		Name="BOOST_BUILD_DIR"
+		Value="$(SOURCE_BUILD_DIR)/$(BOOST_DIR)"
+	/>
+	
+    <UserMacro
+		Name="BOOST_BUILD"
+		Value="$(BOOST_BUILD_DIR)/stage"
+	/>
+    <UserMacro
+		Name="BOOST_LIB"
+		Value="$(BOOST_BUILD)/lib"
+	/>
+	
+    <UserMacro
+		Name="BOOST_DEFINES"
+		Value="BOOST"
+	/>
+
+    <UserMacro
+		Name="BOOST_INCLUDE_DIRS"
+		Value="$(BOOST_SOURCE_DIR)"
+	/>
+    <UserMacro
+		Name="BOOST_LIB_DIRS"
+		Value="$(BOOST_LIB)"
+	/>
+    <UserMacro
+		Name="BOOST_LIBS"
+		Value=""
+	/>
+	
+    <!--===============================================-->
+    
+</VisualStudioPropertySheet>

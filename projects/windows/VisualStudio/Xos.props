@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File: Xos.props -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SOURCE_ROOT_DIR>../../../../../..</SOURCE_ROOT_DIR>
+    <SOURCE_BUILD_DIR>$(SOURCE_ROOT_DIR)</SOURCE_BUILD_DIR>
+    <SOURCE_BUILD>$(SOURCE_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)</SOURCE_BUILD>
+    <XOS_GROUP></XOS_GROUP>
+    <XOS_NAME>Xos</XOS_NAME>
+    <XOS_VERSION></XOS_VERSION>
+    <XOS_DIR>$(XOS_GROUP)/$(XOS_NAME)$(XOS_VERSION)</XOS_DIR>
+    <XOS_SOURCE_DIR>$(SOURCE_ROOT_DIR)/$(XOS_DIR)/src</XOS_SOURCE_DIR>
+    <XOS_BUILD_DIR>$(SOURCE_ROOT_DIR)/$(XOS_DIR)/build</XOS_BUILD_DIR>
+    <XOS_BUILD>$(XOS_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)</XOS_BUILD>
+    <XOS_OBJ>$(XOS_BUILD)/obj/$(ProjectName)</XOS_OBJ>
+    <XOS_LIB>$(XOS_BUILD)/lib</XOS_LIB>
+    <XOS_BIN>$(XOS_BUILD)/bin</XOS_BIN>
+    <XOS_DEFINES>WINSOCK_2</XOS_DEFINES>
+    <XOS_WINDOWS_INCLUDE_DIRS>$(XOS_SOURCE_DIR)/platform/windows/macosx;$(XOS_SOURCE_DIR)/platform/windows/linux/include;$(XOS_SOURCE_DIR)/platform/windows/unix</XOS_WINDOWS_INCLUDE_DIRS>
+    <XOS_INCLUDE_DIRS>$(XOS_WINDOWS_INCLUDE_DIRS);$(XOS_SOURCE_DIR)/thirdparty/xorg;$(XOS_SOURCE_DIR)/thirdparty/gnu/getopt;$(XOS_SOURCE_DIR)/thirdparty/linux/include;$(XOS_SOURCE_DIR)</XOS_INCLUDE_DIRS>
+    <XOS_LIB_DIRS>$(XOS_LIB)</XOS_LIB_DIRS>
+    <XOS_LIBS>libXosCoreWindows.lib;libXosCoreShared.lib;libXosCore.lib;ws2_32.lib</XOS_LIBS>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+  <BuildMacro Include="SOURCE_ROOT_DIR">
+    <Value>$(SOURCE_ROOT_DIR)</Value>
+  </BuildMacro>
+  <BuildMacro Include="SOURCE_BUILD_DIR">
+    <Value>$(SOURCE_BUILD_DIR)</Value>
+  </BuildMacro>
+  <BuildMacro Include="SOURCE_BUILD">
+    <Value>$(SOURCE_BUILD)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_GROUP">
+    <Value>$(XOS_GROUP)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_NAME">
+    <Value>$(XOS_NAME)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_VERSION">
+    <Value>$(XOS_VERSION)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_DIR">
+    <Value>$(XOS_DIR)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_SOURCE_DIR">
+    <Value>$(XOS_SOURCE_DIR)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_BUILD_DIR">
+    <Value>$(XOS_BUILD_DIR)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_BUILD">
+    <Value>$(XOS_BUILD)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_OBJ">
+    <Value>$(XOS_OBJ)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_LIB">
+    <Value>$(XOS_LIB)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_BIN">
+    <Value>$(XOS_BIN)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_DEFINES">
+    <Value>$(XOS_DEFINES)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_WINDOWS_INCLUDE_DIRS">
+    <Value>$(XOS_WINDOWS_INCLUDE_DIRS)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_INCLUDE_DIRS">
+    <Value>$(XOS_INCLUDE_DIRS)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_LIB_DIRS">
+    <Value>$(XOS_LIB_DIRS)</Value>
+  </BuildMacro>
+  <BuildMacro Include="XOS_LIBS">
+    <Value>$(XOS_LIBS)</Value>
+  </BuildMacro>
+  </ItemGroup>
+</Project>

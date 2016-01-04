@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="Xos-zlib">
+    
+    <!--===============================================-->
+    
+    <UserMacro
+        Name="ZLIB_GROUP"
+        Value="thirdparty/libc/zlib/"
+    />
+    <UserMacro
+        Name="ZLIB_NAME"
+        Value="zlib"
+    />
+    <UserMacro
+        Name="ZLIB_VERSION"
+        Value="-1.2.5"
+    />
+
+    <UserMacro
+        Name="ZLIB_DIR"
+        Value="$(ZLIB_GROUP)$(ZLIB_NAME)$(ZLIB_VERSION)"
+    />
+    <UserMacro
+        Name="ZLIB_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(ZLIB_DIR)"
+    />
+    <UserMacro
+        Name="ZLIB_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(ZLIB_DIR)"
+    />
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="ZLIB_BUILD"
+        Value="$(ZLIB_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="ZLIB_OBJ"
+        Value="$(ZLIB_BUILD)/obj"
+    />
+    <UserMacro
+        Name="ZLIB_LIB"
+        Value="$(ZLIB_BUILD)/lib"
+    />
+    <UserMacro
+        Name="ZLIB_BIN"
+        Value="$(ZLIB_BUILD)/bin"
+    />
+    
+    <UserMacro
+        Name="ZLIB_INCLUDE_DIRS"
+        Value="$(ZLIB_SOURCE_DIR)"
+    />
+    <UserMacro
+        Name="ZLIB_LIB_DIRS"
+        Value="$(ZLIB_LIB)"
+    />
+    <UserMacro
+        Name="ZLIB_LIBS"
+        Value="$(ZLIB_NAME).lib"
+    />
+    <UserMacro
+        Name="ZLIB_DEBUG_LIBS"
+        Value="$(ZLIB_LIBS)"
+    />
+    
+    <!--===============================================-->
+    
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>

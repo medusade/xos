@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Xos-qt">
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="QT_GROUP"
+        Value="thirdparty/Qt/"
+    />
+    <UserMacro
+        Name="QT_NAME"
+        Value="Qt"
+    />
+    <UserMacro
+        Name="QT_VERSION"
+        Value="-4.6.2-$(VSVersion)"
+    />
+    <UserMacro
+        Name="QT_DIR"
+        Value="$(QT_GROUP)$(QT_NAME)$(QT_VERSION)"
+    />
+    <UserMacro
+        Name="QT_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(QT_DIR)"
+    />
+    <UserMacro
+        Name="QT_INCLUDE_DIR"
+        Value="$(QT_SOURCE_DIR)/include"
+    />
+    <UserMacro
+        Name="QT_BUILD_DIR"
+        Value="$(QT_SOURCE_DIR)"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="QT_BUILD"
+        Value="$(QT_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="QT_LIB"
+        Value="$(QT_BUILD)/lib"
+    />
+    <UserMacro
+        Name="QT_BIN"
+        Value="$(QT_BUILD)/bin"
+    />
+
+    <UserMacro
+        Name="QT_INCLUDE_DIRS"
+        Value="$(QT_INCLUDE_DIR)/QtOpenGL;$(QT_INCLUDE_DIR)/QtGui;$(QT_INCLUDE_DIR)/QtNetwork;$(QT_INCLUDE_DIR)/QtXml;$(QT_INCLUDE_DIR)/QtCore;$(QT_INCLUDE_DIR)"
+    />
+    <UserMacro
+        Name="QT_LIB_DIRS"
+        Value="$(QT_LIB)"
+    />
+    <UserMacro
+        Name="QT_LIBS"
+        Value="QtOpenGL4.lib QtGui4.lib QtCore4.lib"
+    />
+    <UserMacro
+        Name="QT_MAIN_LIBS"
+        Value="$(QT_LIBS) qtmain.lib"
+    />
+    <UserMacro
+        Name="QT_DEBUG_LIBS"
+        Value="QtOpenGLd4.lib QtGuid4.lib QtCored4.lib"
+    />
+    <UserMacro
+        Name="QT_MAIN_DEBUG_LIBS"
+        Value="$(QT_DEBUG_LIBS) qtmaind.lib"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+		Name="QT_MOC_COMMAND"
+		Value="moc -o$(InputDir)/$(InputName).moc $(InputDir)/$(InputName).hpp"
+	/>
+    <UserMacro
+		Name="QT_MOC_MESSAGE"
+		Value="Running moc"
+	/>
+    <UserMacro
+		Name="QT_MOC_OUTPUTS"
+		Value="$(InputDir)/$(InputName).moc"
+	/>
+    <UserMacro
+		Name="QT_MOC_DEPENDENCES"
+		Value="$(InputDir)/$(InputName).hpp"
+	/>
+
+    <!--===============================================-->
+
+    <UserMacro
+		Name="XOS_GUI_QT_INCLUDE_DIRS"
+		Value="$(QT_INCLUDE_DIRS)"
+	/>
+    <UserMacro
+		Name="XOS_QT_INCLUDE_DIRS"
+		Value="$(XOS_GUI_QT_INCLUDE_DIRS);$(XOS_INCLUDE_DIRS)"
+	/>
+    <UserMacro
+		Name="XOS_QT_LIB_DIRS"
+		Value="$(QT_LIB_DIRS)"
+	/>
+    <UserMacro
+		Name="XOS_QT_LIBS"
+		Value="$(QT_LIBS)"
+	/>
+    <UserMacro
+		Name="XOS_QT_DEBUG_LIBS"
+		Value="$(QT_DEBUG_LIBS)"
+	/>
+
+    <!--===============================================-->
+    
+</VisualStudioPropertySheet>

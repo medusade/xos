@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File: Xos-vcversion.props -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <VCVersion>vc10</VCVersion>
+    <ConfigurationName>$(Configuration)</ConfigurationName>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+  <BuildMacro Include="VCVersion">
+    <Value>$(VCVersion)</Value>
+  </BuildMacro>
+  <BuildMacro Include="ConfigurationName">
+    <Value>$(ConfigurationName)</Value>
+  </BuildMacro>
+  </ItemGroup>
+</Project>

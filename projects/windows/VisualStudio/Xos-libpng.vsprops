@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="Xos-libpng">
+    
+    <!--===============================================-->
+    
+    <UserMacro
+        Name="LIBPNG_GROUP"
+        Value="thirdparty/libc/libpng/"
+    />
+    <UserMacro
+        Name="LIBPNG_NAME"
+        Value="libpng"
+    />
+    <UserMacro
+        Name="LIBPNG_VERSION"
+        Value="-1.2.36"
+    />
+
+    <UserMacro
+        Name="LIBPNG_DIR"
+        Value="$(LIBPNG_GROUP)$(LIBPNG_NAME)$(LIBPNG_VERSION)"
+    />
+    <UserMacro
+        Name="LIBPNG_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LIBPNG_DIR)"
+    />
+    <UserMacro
+        Name="LIBPNG_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LIBPNG_DIR)"
+    />
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBPNG_BUILD"
+        Value="$(LIBPNG_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="LIBPNG_OBJ"
+        Value="$(LIBPNG_BUILD)/obj"
+    />
+    <UserMacro
+        Name="LIBPNG_LIB"
+        Value="$(LIBPNG_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LIBPNG_BIN"
+        Value="$(LIBPNG_BUILD)/bin"
+    />
+    
+    <UserMacro
+        Name="LIBPNG_INCLUDE_DIRS"
+        Value="$(LIBPNG_SOURCE_DIR)"
+    />
+    <UserMacro
+        Name="LIBPNG_LIB_DIRS"
+        Value="$(LIBPNG_LIB)"
+    />
+    <UserMacro
+        Name="LIBPNG_LIBS"
+        Value="$(LIBPNG_NAME).lib"
+    />
+    <UserMacro
+        Name="LIBPNG_DEBUG_LIBS"
+        Value="$(LIBPNG_LIBS)"
+    />
+    
+    <!--===============================================-->
+
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>

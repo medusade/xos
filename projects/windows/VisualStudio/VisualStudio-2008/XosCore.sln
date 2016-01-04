@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A94AE1CD-7485-4F7A-AC09-C1A57CF0AEE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{EFB353AF-FE85-40E2-9CCE-197D46A335EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Property Sheets", "Property Sheets", "{508461A3-7067-454B-A975-100A9BD1BB8E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Xos-boost.vsprops = ..\Xos-boost.vsprops
+		..\Xos-libpng.vsprops = ..\Xos-libpng.vsprops
+		..\Xos-libwebsockets.vsprops = ..\Xos-libwebsockets.vsprops
+		..\Xos-log4cxx.vsprops = ..\Xos-log4cxx.vsprops
+		..\Xos-mongoose.vsprops = ..\Xos-mongoose.vsprops
+		..\Xos-mxde.vsprops = ..\Xos-mxde.vsprops
+		..\Xos-qt.vsprops = ..\Xos-qt.vsprops
+		..\Xos-webrtc.vsprops = ..\Xos-webrtc.vsprops
+		..\Xos-webrtc2.vsprops = ..\Xos-webrtc2.vsprops
+		..\Xos-wxwidgets.vsprops = ..\Xos-wxwidgets.vsprops
+		..\Xos-zlib.vsprops = ..\Xos-zlib.vsprops
+		..\Xos.vsprops = ..\Xos.vsprops
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCore", "libXosCore\libXosCore.vcproj", "{BAE70CE2-8375-412E-8274-A4FB4F895239}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCoreUnix", "libXosCoreUnix\libXosCoreUnix.vcproj", "{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCoreWindows", "libXosCoreWindows\libXosCoreWindows.vcproj", "{4D1DE82C-9336-4DD6-9816-196E14754393}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XosHello", "XosHello\XosHello.vcproj", "{7C5D32B9-BAC3-40BF-87D2-F21964617954}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D1DE82C-9336-4DD6-9816-196E14754393} = {4D1DE82C-9336-4DD6-9816-196E14754393}
+		{BAE70CE2-8375-412E-8274-A4FB4F895239} = {BAE70CE2-8375-412E-8274-A4FB4F895239}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosMt", "libXosMt\libXosMt.vcproj", "{DB095174-B96B-4198-9B47-2F4253CDF829}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XosMtHello", "XosMtHello\XosMtHello.vcproj", "{197FABA4-3AE4-4056-9BFD-095F5EE953E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D1DE82C-9336-4DD6-9816-196E14754393} = {4D1DE82C-9336-4DD6-9816-196E14754393}
+		{BAE70CE2-8375-412E-8274-A4FB4F895239} = {BAE70CE2-8375-412E-8274-A4FB4F895239}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Debug|x64.ActiveCfg = Debug|x64
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Release|Win32.Build.0 = Release|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Release|x64.ActiveCfg = Release|Win32
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Debug|Win32.Build.0 = Debug|Win32
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Debug|x64.ActiveCfg = Debug|x64
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Release|Win32.ActiveCfg = Release|Win32
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Release|Win32.Build.0 = Release|Win32
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753}.Release|x64.ActiveCfg = Release|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Debug|Win32.Build.0 = Debug|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Debug|x64.ActiveCfg = Debug|x64
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Release|Win32.ActiveCfg = Release|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Release|Win32.Build.0 = Release|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Release|x64.ActiveCfg = Release|Win32
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Debug|Win32.Build.0 = Debug|Win32
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Debug|x64.ActiveCfg = Debug|x64
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Release|Win32.ActiveCfg = Release|Win32
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Release|Win32.Build.0 = Release|Win32
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954}.Release|x64.ActiveCfg = Release|Win32
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Debug|Win32.Build.0 = Debug|Win32
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Debug|x64.ActiveCfg = Debug|x64
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Release|Win32.ActiveCfg = Release|Win32
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Release|Win32.Build.0 = Release|Win32
+		{DB095174-B96B-4198-9B47-2F4253CDF829}.Release|x64.ActiveCfg = Release|Win32
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Debug|Win32.Build.0 = Debug|Win32
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Debug|x64.ActiveCfg = Debug|x64
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Release|Win32.ActiveCfg = Release|Win32
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Release|Win32.Build.0 = Release|Win32
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Release|x64.ActiveCfg = Release|x64
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C5D32B9-BAC3-40BF-87D2-F21964617954} = {A94AE1CD-7485-4F7A-AC09-C1A57CF0AEE4}
+		{197FABA4-3AE4-4056-9BFD-095F5EE953E2} = {A94AE1CD-7485-4F7A-AC09-C1A57CF0AEE4}
+		{BAE70CE2-8375-412E-8274-A4FB4F895239} = {EFB353AF-FE85-40E2-9CCE-197D46A335EA}
+		{17920C1D-E4F4-4AC9-9CBD-7D3980C6A753} = {EFB353AF-FE85-40E2-9CCE-197D46A335EA}
+		{4D1DE82C-9336-4DD6-9816-196E14754393} = {EFB353AF-FE85-40E2-9CCE-197D46A335EA}
+		{DB095174-B96B-4198-9B47-2F4253CDF829} = {EFB353AF-FE85-40E2-9CCE-197D46A335EA}
+	EndGlobalSection
+EndGlobal
