@@ -31,13 +31,26 @@ template
 <class TWhat, size_t VDefaultSize=XOS_ARRAY_DEFAULT_SIZE,
  class TExtend=ExportBase, class TImplement=InterfaceBase>
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 class EXPORT_CLASS Array: virtual public TImplement, public TExtend {
 public:
+    typedef TImplement TImplements;
+    typedef TExtend TExtends;
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     Array(ssize_t length)
     : m_elements(m_defaultElements),
       m_elementsSize(VDefaultSize),
       m_elementsLength(0) {
         SetLength(length);
+    }
+    Array(const Array& copy)
+    : m_elements(m_defaultElements),
+      m_elementsSize(VDefaultSize),
+      m_elementsLength(0) {
+        Assign(copy.Elements(), copy.Length());
     }
     Array()
     : m_elements(m_defaultElements),
@@ -48,6 +61,8 @@ public:
         Clear();
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t Assign(const TWhat* elements, size_t elementsLength){
         size_t count = 0;
         size_t newElementsLength;
@@ -63,6 +78,9 @@ public:
         m_elementsLength = (count = elementsLength);
         return count;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t Append(const TWhat* elements, size_t elementsLength){
         size_t count = 0;
         size_t newElementsLength;
@@ -78,6 +96,9 @@ public:
         m_elementsLength += (count = elementsLength);
         return count;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t Set(const TWhat& element){
         return Set(element, m_elementsLength);
     }
@@ -96,6 +117,9 @@ public:
         m_elementsLength = (count = elementsLength);
         return count;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t Clear(){
         size_t count = m_elementsLength;
         if (m_elements)
@@ -107,6 +131,8 @@ public:
         return count;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t SetLength(ssize_t toLength){
         size_t toSize;
 
@@ -126,6 +152,9 @@ public:
     virtual size_t Length() const {
         return m_elementsLength;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t SetSize(size_t toSize){
         if (toSize != m_elementsSize){
             AdjustToSize(NewSize(toSize));
@@ -135,6 +164,9 @@ public:
     virtual size_t Size() const {
         return m_elementsSize;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual TWhat* Elements() const {
         return m_elements;
     }
@@ -146,6 +178,8 @@ public:
     }
 
 protected:
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual size_t AdjustToSize(size_t size) {
         size_t count = 0;
         TWhat* elements;
@@ -207,6 +241,8 @@ protected:
         return count;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
     TWhat m_defaultElements[VDefaultSize];
     TWhat* m_elements;

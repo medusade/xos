@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2014 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,79 +13,79 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: CipherSuites.hpp
+///   File: CipherSuite.hpp
 ///
 /// Author: $author$
-///   Date: 4/26/2014
+///   Date: 4/24/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_TLS_CIPHERSUITES_HPP
-#define _XOS_TLS_CIPHERSUITES_HPP
+#ifndef _XOS_INET_TLS_CIPHERSUITE_HPP
+#define _XOS_INET_TLS_CIPHERSUITE_HPP
 
-#include "xos/inet/tls/CipherSuite.hpp"
+#include "xos/inet/tls/Base.hpp"
 
 namespace xos {
 namespace tls {
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS CipherSuites: virtual public Implement, public Extend {
+class _EXPORT_CLASS CipherSuite: virtual public Implement, public Extend {
 public:
     typedef Implement Implements;
     typedef Extend Extends;
-    typedef tls::Vector<uint16_t, sizeof(uint16_t), uint16_t> Vector;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    CipherSuites(uint16_t which = NULL_WITH_NULL_NULL) {
-        set_vector(which);
+    CipherSuite(uint16_t which = NULL_WITH_NULL_NULL): m_which(which) {
     }
-    virtual ~CipherSuites() {}
+    CipherSuite(const CipherSuite& copy): m_which(copy.which()) {
+    }
+    virtual ~CipherSuite() {
+    }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Read(io::Reader& reader) {
         ssize_t count = 0;
+        ssize_t amount = 0;
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::ReadMsb()...");
+        if (0 < (amount = ReadMsb(reader, m_which, sizeof(m_which)))) {
+            XOS_LOG_MESSAGE_DEBUG("...which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::ReadMsb()");
+            count += amount;
+        }
         return count;
     }
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
-        if (0 < (amount = m_vector.Write(writer))) {
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::WriteMsb()...");
+        if (0 < (amount = WriteMsb(writer, m_which, sizeof(m_which)))) {
+            XOS_LOG_MESSAGE_DEBUG("..." << amount << " = " << __XOS_LOGGER_CLASS__ << "::WriteMsb()");
             count += amount;
-            XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Write()");
         }
         return count;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual Vector& set_vector(uint16_t which) {
-        uint8_t bytes[sizeof(uint16_t)];
-        for (uint8_t i = 0; i < sizeof(bytes); ++i, which >>= 8) {
-            bytes[(sizeof(uint16_t)-1)-i] = (which & 15);
-        }
-        m_vector.Set(*((uint16_t*)(bytes)), 1);
-        return m_vector;
+    virtual uint16_t set_which(uint16_t to) {
+        return m_which;
     }
-    virtual Vector& set_vector(const Vector& to) {
-        m_vector.Assign(to);
-        return m_vector;
+    virtual uint16_t which() const {
+        return m_which;
     }
-    virtual const Vector& vector() const {
-        return m_vector;
+    virtual operator uint16_t() const {
+        return m_which;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
-        ssize_t count = 0;
-        count += m_vector.SizeOf();
+        ssize_t count = sizeof(m_which);
         return count;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
-    Vector m_vector;
+    uint16_t m_which;
 };
 
-} // namespace tls
+} // namespace tls 
 } // namespace xos 
 
-#endif // _XOS_TLS_CIPHERSUITES_HPP 
+#endif // _XOS_INET_TLS_CIPHERSUITE_HPP 

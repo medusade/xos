@@ -44,18 +44,24 @@ namespace tls {
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS ClientHello: virtual public Implement, virtual public Extend {
+class _EXPORT_CLASS ClientHello: virtual public Implement, public Extend {
 public:
+    typedef Implement Implements;
+    typedef Extend Extends;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     ClientHello
-    (uint32_t gmt_unix_time, opaque random_byte,
-     opaque session_id, uint16_t cipher_suite)
-     : m_random(gmt_unix_time, random_byte),
+    (const ProtocolVersion& client_version,
+     const GmtUnixTime& gmt_unix_time, const Random& random,
+     const SessionID& session_id, const CipherSuite& cipher_suite)
+     : m_client_version(client_version),
+       m_random(gmt_unix_time, random),
        m_session_id(session_id),
        m_cipher_suites(cipher_suite) {
     }
-    ClientHello() {}
+    ClientHello(const ProtocolVersion& client_version)
+    : m_client_version(client_version) {}
+    ClientHello(): m_client_version(ProtocolVersion())  {}
     virtual ~ClientHello() {}
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -83,6 +89,8 @@ public:
         }
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
         count += m_client_version.SizeOf();
@@ -91,6 +99,15 @@ public:
         count += m_cipher_suites.SizeOf();
         count += m_compression_methods.SizeOf();
         return count;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual ProtocolVersion& set_client_version(const ProtocolVersion& to) {
+        m_client_version = to;
+        return m_client_version;
+    }
+    virtual const ProtocolVersion& client_version() const {
+        return m_client_version;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////

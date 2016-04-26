@@ -28,34 +28,45 @@ namespace tls {
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS SessionID: virtual public Implement, virtual public Extend {
+class _EXPORT_CLASS SessionID: virtual public Implement, public Extend {
 public:
+    typedef Implement Implements;
+    typedef Extend Extends;
     enum { MaxLength = 32 };
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    SessionID(const opaque* values, uint8_t count)
-    : m_vector(values, count) {}
-    SessionID(const opaque& value, uint8_t count)
-    : m_vector(value, count) {}
-    SessionID(const opaque& value)
-    : m_vector(value, MaxLength) {}
+    SessionID(const opaque_t* values, uint8_t count)
+    : m_vector(values, count) {
+    }
+    SessionID(const opaque_t& value)
+    : m_vector(value, MaxLength) {
+    }
     SessionID() {}
     virtual ~SessionID() {}
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Read(io::Reader& reader) {
         ssize_t count = 0;
+        ssize_t amount = 0;
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Read()...");
+        if (0 < (amount = m_vector.Read(reader))) {
+            XOS_LOG_MESSAGE_DEBUG("..." << __XOS_LOGGER_CLASS__ << "::Read()");
+            count += amount;
+        }
         return count;
     }
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_DEBUG("class " << __XOS_LOGGER_CLASS__ << "...");
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
         if (0 < (amount = m_vector.Write(writer))) {
+            XOS_LOG_MESSAGE_DEBUG("..." << __XOS_LOGGER_CLASS__ << "::Write()");
             count += amount;
         }
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
         count += m_vector.SizeOf();
@@ -64,7 +75,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
-    Vector<opaque, 1, uint8_t> m_vector;
+    Vector<opaque_t, 1, uint8_t> m_vector;
 };
 
 } // namespace tls

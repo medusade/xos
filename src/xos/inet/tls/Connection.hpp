@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2014 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,40 +13,46 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Client.hpp
+///   File: Connection.hpp
 ///
 /// Author: $author$
-///   Date: 4/26/2014
+///   Date: 4/26/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_TLS_CLIENT_HPP
-#define _XOS_TLS_CLIENT_HPP
+#ifndef _XOS_INET_TLS_CONNECTION_HPP
+#define _XOS_INET_TLS_CONNECTION_HPP
 
-#include "xos/inet/tls/ClientHello.hpp"
-#include "xos/inet/tls/Connection.hpp"
+#include "xos/inet/tls/Base.hpp"
 
 namespace xos {
 namespace tls {
 
-typedef ConnectionImplements ClientImplements;
-typedef Connection ClientExtends;
+typedef io::Stream ConnectionImplements;
+typedef Extend ConnectionExtends;
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS Client: virtual public ClientImplements, public ClientExtends {
+class _EXPORT_CLASS Connection
+: virtual public ConnectionImplements, public ConnectionExtends {
 public:
-    typedef ClientImplements Implements;
-    typedef ClientExtends Extends;
+    typedef ConnectionImplements Implements;
+    typedef ConnectionExtends Extends;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    Client(io::Reader& reader, io::Writer& writer)
-    : Extends(reader, writer) {
+    Connection(io::Reader& reader, io::Writer& writer)
+    : m_reader(reader), m_writer(writer) {
     }
-    virtual ~Client() {
+    Connection(const Connection& copy)
+    : m_reader(copy.m_reader), m_writer(copy.m_writer) {
+    }
+    virtual ~Connection() {
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+protected:
+    io::Reader& m_reader;
+    io::Writer& m_writer;
 };
 
-} // namespace tls
+} // namespace tls 
 } // namespace xos 
 
-#endif // _XOS_TLS_CLIENT_HPP 
+#endif // _XOS_INET_TLS_CONNECTION_HPP 

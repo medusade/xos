@@ -59,28 +59,83 @@ class _EXPORT_CLASS HandshakeType: virtual public Implement, virtual public Exte
 public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    HandshakeType(uint8_t type = HANDSHAKE_TYPE_UKNOWN): m_type(type) {}
+    HandshakeType(uint8_t which = HANDSHAKE_TYPE_UKNOWN): m_which(which) {}
+    HandshakeType(const HandshakeType& copy): m_which(copy.which()) {}
     virtual ~HandshakeType() {}
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Read(io::Reader& reader) {
         ssize_t count = 0;
+        ssize_t amount = 0;
+        if (0 < (amount = ReadMsb(reader, m_which, sizeof(m_which)))) {
+            count += amount;
+            switch (m_which) {
+            case HANDSHAKE_TYPE_HELLO_REQUEST:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_HELLO_REQUEST which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_CLIENT_HELLO:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_CLIENT_HELLO which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_SERVER_HELLO:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_SERVER_HELLO which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_CLIENT_KEY_EXCHANGE:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_CLIENT_KEY_EXCHANGE which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_SERVER_KEY_EXCHANGE:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_SERVER_KEY_EXCHANGE which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_SERVER_HELLO_DONE:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_SERVER_HELLO_DONE which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_CERTIFICATE:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_CERTIFICATE which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_CERTIFICATE_REQUEST:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_CERTIFICATE_REQUEST which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_CERTIFICATE_VERIFY:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_CERTIFICATE_VERIFY which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            case HANDSHAKE_TYPE_FINISHED:
+                XOS_LOG_MESSAGE_DEBUG("...HANDSHAKE_TYPE_FINISHED which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                break;
+            default:
+                XOS_LOG_MESSAGE_DEBUG("...unexpected which = " << m_which << " on " << __XOS_LOGGER_CLASS__ << "::Read()");
+                count = 0;
+                break;
+            }
+        }
         return count;
     }
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
-        count = WriteMsb(writer, m_type, sizeof(m_type));
+        count = WriteMsb(writer, m_which, sizeof(m_which));
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
-        count += sizeof(m_type);
+        count += sizeof(m_which);
         return count;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual uint8_t set_which(uint8_t to) {
+        m_which = to;
+        return m_which;
+    }
+    virtual uint8_t which() const {
+        return m_which;
+    }
+    virtual operator uint8_t() const {
+        return m_which;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
-    uint8_t m_type;
+    uint8_t m_which;
 };
 
 ///////////////////////////////////////////////////////////////////////
@@ -90,39 +145,78 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     Handshake(uint8_t type, Implement& msg)
-        : m_msg_type(type), m_msg(msg), m_length(msg.SizeOf()) {}
+    : m_msg_type(type), m_msg(msg), m_length(msg.SizeOf()) {}
     Handshake(): m_msg(m_null_msg) {}
     virtual ~Handshake() {}
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual ssize_t Read(io::Reader& reader) {
+    virtual ssize_t ReadMsgType(io::Reader& reader) {
         ssize_t count = 0;
+        ssize_t amount = 0;
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::ReadMsgType()...");
+        if (0 < (amount = m_msg_type.Read(reader))) {
+            count += amount;
+            XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::ReadMsgType()");
+        }
         return count;
     }
+    virtual ssize_t ReadLength(io::Reader& reader) {
+        ssize_t count = 0;
+        ssize_t amount = 0;
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::ReadLength()...");
+        if (0 < (amount = m_length.Read(reader))) {
+            count += amount;
+            XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::ReadLength()");
+        }
+        return count;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_DEBUG("class " << __XOS_LOGGER_CLASS__ << "...");
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
         if (0 < (amount = m_length.Value())) {
-            XOS_LOG_DEBUG("handshake length = " << m_length.Value() << "");
+            XOS_LOG_MESSAGE_DEBUG("handshake length = " << m_length.Value() << "");
             if (0 < (amount = m_msg_type.Write(writer))) {
                 count += amount;
                 if (0 < (amount = m_length.Write(writer))) {
                     count += amount;
                     if (0 < (amount = m_msg.Write(writer))) {
                         count += amount;
+                        XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Write()");
                     }
                 }
             }
         }
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
         count += m_msg_type.SizeOf();
         count += m_length.SizeOf();
         count += m_length.Value();
         return count;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual HandshakeType& set_msg_type(const HandshakeType& to) {
+        m_msg_type = to;
+        return m_msg_type;
+    }
+    virtual const HandshakeType& msg_type() const {
+        return m_msg_type;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual Uint24& set_length(const Uint24& to) {
+        m_length = to;
+        return m_length;
+    }
+    virtual const Uint24& length() const {
+        return m_length;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////

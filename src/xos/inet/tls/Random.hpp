@@ -21,6 +21,7 @@
 #ifndef _XOS_TLS_RANDOM_HPP
 #define _XOS_TLS_RANDOM_HPP
 
+#include "xos/inet/tls/GmtUnixTime.hpp"
 #include "xos/inet/tls/Base.hpp"
 
 namespace xos {
@@ -28,46 +29,83 @@ namespace tls {
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS Random: virtual public Implement, virtual public Extend {
+class _EXPORT_CLASS Random: virtual public Implement, public Extend {
 public:
+    typedef Implement Implements;
+    typedef Extend Extends;
     enum { Size = 28 };
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     Random
-    (uint32_t gmt_unix_time, const opaque* random_bytes, size_t length)
+    (uint32_t gmt_unix_time, const opaque_t* random_bytes, size_t length)
     : m_gmt_unix_time(gmt_unix_time) {
-        if (Size < (length))
-            length = Size;
-        Opaque::Copy(m_random_bytes, random_bytes, length);
+        set_random_bytes(random_bytes, length);
     }
     Random
-    (uint32_t gmt_unix_time, opaque random_byte)
+    (uint32_t gmt_unix_time, opaque_t random_byte)
     : m_gmt_unix_time(gmt_unix_time) {
-        Opaque::Set(m_random_bytes, random_byte, Size);
+        set_random_bytes(random_byte);
     }
-    Random()
+    Random
+    (const GmtUnixTime& gmt_unix_time, const Random& copy)
+    : m_gmt_unix_time(gmt_unix_time) {
+        set_random_bytes(copy.random_bytes(), Size);
+    }
+    Random(opaque_t random_byte = 0)
     : m_gmt_unix_time(0) {
-        Opaque::Set(m_random_bytes, 0, Size);
+        set_random_bytes(random_byte);
     }
     virtual ~Random() {}
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Read(io::Reader& reader) {
         ssize_t count = 0;
+        ssize_t amount = 0;
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Read()...");
+        if (0 < (amount = m_gmt_unix_time.Read(reader))) {
+            count += amount;
+            if (0 < (amount = ReadOpaque(reader, m_random_bytes, Size))) {
+                count += amount;
+                XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Read()");
+            }
+        }
         return count;
     }
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_DEBUG("class " << __XOS_LOGGER_CLASS__ << "...");
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
         if (0 < (amount = m_gmt_unix_time.Write(writer))) {
             count += amount;
             if (0 < (amount = WriteOpaque(writer, m_random_bytes, Size))) {
                 count += amount;
+                XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Write()");
             }
         }
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual opaque_t* set_random_bytes(const opaque_t* to, size_t length) {
+        if ((to) && (length)) {
+            for (size_t remain = Size; remain; remain -= length) {
+                if (remain < (length)) {
+                    length = remain;
+                }
+                Opaques::Copy(m_random_bytes, to, length);
+            }
+        }
+        return m_random_bytes;
+    }
+    virtual opaque_t* set_random_bytes(opaque_t to) {
+        Opaques::Set(m_random_bytes, to, Size);
+        return m_random_bytes;
+    }
+    virtual const opaque_t* random_bytes() const {
+        return m_random_bytes;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
         count += m_gmt_unix_time.SizeOf();
@@ -78,7 +116,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
 protected:
     GmtUnixTime m_gmt_unix_time;
-    opaque m_random_bytes[Size];
+    opaque_t m_random_bytes[Size];
 };
 
 } // namespace tls

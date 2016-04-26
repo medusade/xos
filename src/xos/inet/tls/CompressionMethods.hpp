@@ -26,11 +26,13 @@
 namespace xos {
 namespace tls {
 
-typedef uint8_t CompressionMethod;
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS CompressionMethods: virtual public Implement, virtual public Extend {
+class _EXPORT_CLASS CompressionMethods: virtual public Implement, public Extend {
 public:
+    typedef Implement Implements;
+    typedef Extend Extends;
+    typedef Vector<uint8_t, sizeof(uint8_t), uint8_t> Vector;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     CompressionMethods(const uint8_t* method, uint8_t length) {
@@ -49,12 +51,15 @@ public:
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_DEBUG("class " << __XOS_LOGGER_CLASS__ << "...");
+        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
         if (0 < (amount = m_vector.Write(writer))) {
             count += amount;
+            XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Write()");
         }
         return count;
     }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
         count += m_vector.SizeOf();
@@ -63,7 +68,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
-    Vector<CompressionMethod, 1, uint8_t> m_vector;
+    Vector m_vector;
 };
 
 } // namespace tls

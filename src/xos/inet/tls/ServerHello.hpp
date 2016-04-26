@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2014 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,49 +13,54 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: ProtocolVersion.hpp
+///   File: ServerHello.hpp
 ///
 /// Author: $author$
-///   Date: 4/25/2014
+///   Date: 4/25/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_TLS_PROTOCOLVERSION_HPP
-#define _XOS_TLS_PROTOCOLVERSION_HPP
+#ifndef _XOS_INET_TLS_SERVERHELLO_HPP
+#define _XOS_INET_TLS_SERVERHELLO_HPP
 
+#include "xos/inet/tls/ProtocolVersion.hpp"
+#include "xos/inet/tls/Random.hpp"
+#include "xos/inet/tls/SessionID.hpp"
+#include "xos/inet/tls/CipherSuite.hpp"
+#include "xos/inet/tls/CompressionMethod.hpp"
 #include "xos/inet/tls/Base.hpp"
 
 namespace xos {
 namespace tls {
 
-/* RFC 2246
-    struct {
-        uint8 major, minor;
-    } ProtocolVersion;
-*/
-
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS ProtocolVersion: virtual public Implement, public Extend {
+class _EXPORT_CLASS ServerHello: virtual public Implement, public Extend {
 public:
     typedef Implement Implements;
     typedef Extend Extends;
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    ProtocolVersion
-    (uint8_t major = TLS_PROTOCOL_VERSION_1_MAJOR,
-     uint8_t minor = TLS_PROTOCOL_VERSION_1_0_MINOR)
-    : m_major(major), m_minor(minor) {}
-    virtual ~ProtocolVersion() {}
+    ServerHello() {
+    }
+    virtual ~ServerHello() {
+    }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t Read(io::Reader& reader) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Read()...");
-        if (0 < (amount = ReadMsb(reader, m_major, 1))) {
+        if (amount  = (m_server_version.Read(reader))) {
             count += amount;
-            if (0 < (amount = ReadMsb(reader, m_minor, 1))) {
+            if (amount  = (m_random.Read(reader))) {
                 count += amount;
-                XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Read()");
+                if (amount  = (m_session_id.Read(reader))) {
+                    count += amount;
+                    if (amount  = (m_cipher_suite.Read(reader))) {
+                        count += amount;
+                        if (amount  = (m_compression_method.Read(reader))) {
+                            count += amount;
+                        }
+                    }
+                }
             }
         }
         return count;
@@ -63,12 +68,19 @@ public:
     virtual ssize_t Write(io::Writer& writer) {
         ssize_t count = 0;
         ssize_t amount = 0;
-        XOS_LOG_MESSAGE_DEBUG("" << __XOS_LOGGER_CLASS__ << "::Write()...");
-        if (0 < (amount = WriteMsb(writer, m_major, 1))) {
+        if (amount  = (m_server_version.Write(writer))) {
             count += amount;
-            if (0 < (amount = WriteMsb(writer, m_minor, 1))) {
+            if (amount  = (m_random.Write(writer))) {
                 count += amount;
-                XOS_LOG_MESSAGE_DEBUG("..." << count << " = " << __XOS_LOGGER_CLASS__ << "::Write()");
+                if (amount  = (m_session_id.Write(writer))) {
+                    count += amount;
+                    if (amount  = (m_cipher_suite.Write(writer))) {
+                        count += amount;
+                        if (amount  = (m_compression_method.Write(writer))) {
+                            count += amount;
+                        }
+                    }
+                }
             }
         }
         return count;
@@ -77,17 +89,33 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual ssize_t SizeOf() const {
         ssize_t count = 0;
-        count += sizeof(m_major);
-        count += sizeof(m_minor);
+        count += m_server_version.SizeOf();
+        count += m_random.SizeOf();
+        count += m_session_id.SizeOf();
+        count += m_cipher_suite.SizeOf();
+        count += m_compression_method.SizeOf();
         return count;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual ProtocolVersion& set_server_version(const ProtocolVersion& to) {
+        m_server_version = to;
+        return m_server_version;
+    }
+    virtual const ProtocolVersion& server_version() const {
+        return m_server_version;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
-    uint8_t m_major, m_minor;
+    ProtocolVersion m_server_version;
+    Random m_random;
+    SessionID m_session_id;
+    CipherSuite m_cipher_suite;
+    CompressionMethod m_compression_method;
 };
 
-} // namespace tls
+} // namespace tls 
 } // namespace xos 
 
-#endif // _XOS_TLS_PROTOCOLVERSION_HPP 
+#endif // _XOS_INET_TLS_SERVERHELLO_HPP 

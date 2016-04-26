@@ -40,10 +40,12 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     ClientHello
-    (uint32_t gmt_unix_time, opaque_t random_byte,
-     opaque_t session_id, uint16_t cipher_suite)
-    : Extends(gmt_unix_time, random_byte, session_id, cipher_suite) {
-        set_client_version(ProtocolVersion());
+    (const ProtocolVersion& client_version,
+     const GmtUnixTime& gmt_unix_time, const Random& random,
+     const SessionID& session_id, const CipherSuite& cipher_suite)
+    : Extends(client_version, gmt_unix_time, random, session_id, cipher_suite) {
+    }
+    ClientHello(): Extends(ProtocolVersion()) {
     }
     virtual ~ClientHello() {
     }

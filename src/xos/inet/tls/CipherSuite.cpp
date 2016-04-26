@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2014 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,40 +13,18 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: Client.hpp
+///   File: CipherSuite.cpp
 ///
 /// Author: $author$
-///   Date: 4/26/2014
+///   Date: 4/24/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _XOS_TLS_CLIENT_HPP
-#define _XOS_TLS_CLIENT_HPP
-
-#include "xos/inet/tls/ClientHello.hpp"
-#include "xos/inet/tls/Connection.hpp"
+#include "xos/inet/tls/CipherSuite.hpp"
 
 namespace xos {
 namespace tls {
 
-typedef ConnectionImplements ClientImplements;
-typedef Connection ClientExtends;
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS Client: virtual public ClientImplements, public ClientExtends {
-public:
-    typedef ClientImplements Implements;
-    typedef ClientExtends Extends;
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    Client(io::Reader& reader, io::Writer& writer)
-    : Extends(reader, writer) {
-    }
-    virtual ~Client() {
-    }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-};
 
-} // namespace tls
+} // namespace tls 
 } // namespace xos 
-
-#endif // _XOS_TLS_CLIENT_HPP 
