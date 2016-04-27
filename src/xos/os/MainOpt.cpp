@@ -22,55 +22,88 @@
 
 namespace xos {
 
-int OnLoggingLevel(const char* optarg)
-{
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+int OnLoggingLevel(const char* optarg) {
     int err = 1;
     char c;
 
-    if ((optarg))
-    if ((c = optarg[0]))
-    if (!(optarg[1]))
-    {
+    if ((optarg) && (c = optarg[0]) && !(optarg[1])) {
         err = 0;
-        switch(c)
-        {
-        case 'a':
+        switch(c) {
+        case XOS_MAIN_LOGGING_OPTARG_N_ALL:
+        case XOS_MAIN_LOGGING_OPTARG_C_ALL:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ALL);
             break;
 
-        case '0':
-        case 'n':
+        case XOS_MAIN_LOGGING_OPTARG_N_NONE:
+        case XOS_MAIN_LOGGING_OPTARG_C_NONE:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_NONE);
             break;
 
-        case '1':
-        case 'f':
+        case XOS_MAIN_LOGGING_OPTARG_N_FATAL:
+        case XOS_MAIN_LOGGING_OPTARG_C_FATAL:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_FATAL);
             break;
 
-        case '2':
-        case 'e':
+        case XOS_MAIN_LOGGING_OPTARG_N_ERROR:
+        case XOS_MAIN_LOGGING_OPTARG_C_ERROR:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR);
             break;
 
-        case '3':
-        case 'w':
+        case XOS_MAIN_LOGGING_OPTARG_N_WARN:
+        case XOS_MAIN_LOGGING_OPTARG_C_WARN:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_WARN);
             break;
 
-        case '4':
-        case 'i':
+        case XOS_MAIN_LOGGING_OPTARG_N_INFO:
+        case XOS_MAIN_LOGGING_OPTARG_C_INFO:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_INFO);
             break;
 
-        case '5':
-        case 'd':
+        case XOS_MAIN_LOGGING_OPTARG_N_DEBUG:
+        case XOS_MAIN_LOGGING_OPTARG_C_DEBUG:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_DEBUG);
             break;
 
-        case '6':
-        case 't':
+        case XOS_MAIN_LOGGING_OPTARG_N_TRACE:
+        case XOS_MAIN_LOGGING_OPTARG_C_TRACE:
             XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_TRACE);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_ALL:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ALL);
+            break;
+
+        //
+        // Message
+        //
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_NONE:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_MESSAGE_NONE);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_FATAL:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_FATAL | XOS_LOGGING_LEVELS_MESSAGE_FATAL);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_ERROR:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR | XOS_LOGGING_LEVELS_MESSAGE_ERROR);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_WARN:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR | XOS_LOGGING_LEVELS_MESSAGE_WARN);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_INFO:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR | XOS_LOGGING_LEVELS_MESSAGE_INFO);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_DEBUG:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR | XOS_LOGGING_LEVELS_MESSAGE_DEBUG);
+            break;
+
+        case XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_TRACE:
+            XOS_SET_LOGGING_LEVEL(XOS_LOGGING_LEVELS_ERROR | XOS_LOGGING_LEVELS_MESSAGE_TRACE);
             break;
 
         default:
@@ -80,14 +113,14 @@ int OnLoggingLevel(const char* optarg)
     return err;
 }
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 int OnLoggingOption
 (int optval, const char* optarg,
  const char* optname, int optind,
- int argc, char**argv, char**env)
-{
+ int argc, char**argv, char**env) {
     int err = 1;
-    switch(optval)
-    {
+    switch(optval) {
     case 'l':
         err = OnLoggingLevel(optarg);
         break;

@@ -42,72 +42,127 @@
 namespace xos {
 
 typedef InterfaceBase LoggerImplement;
-
 class EXPORT_CLASS LoggerImplemented;
-
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 class EXPORT_CLASS Logger: virtual public LoggerImplement {
 public:
     typedef LoggerImplement Implements;
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     class EXPORT_CLASS Level {
     public:
         typedef unsigned Enable;
         enum {
+            Shift_Fatal = 0,
+            Shift_Error,
+            Shift_Warn,
+            Shift_Info,
+            Shift_Debug,
+            Shift_Trace,
+
+            Shift_Next
+        };
+        enum {
             None  = 0,
 
-            Fatal = (1 << 0), 
-            Error = (1 << 1), 
-            Warn  = (1 << 2), 
-            Info  = (1 << 3), 
-            Debug = (1 << 4), 
-            Trace = (1 << 5), 
+            Fatal = (1 << Shift_Fatal),
+            Error = (1 << Shift_Error),
+            Warn  = (1 << Shift_Warn),
+            Info  = (1 << Shift_Info),
+            Debug = (1 << Shift_Debug),
+            Trace = (1 << Shift_Trace),
 
-            Next  = (1 << 6), 
+            Next  = (1 << Shift_Next),
             All   = (Next - 1)
         };
-        Level(Enable enable = None): m_enable(enable){}
-        Level(const Level& copy): m_enable(copy.m_enable){}
-        inline Level& operator = (Enable enable){
+        enum {
+            Message_None  = 0,
+
+            Message_Fatal = (Fatal << Shift_Next),
+            Message_Error = (Error << Shift_Next),
+            Message_Warn  = (Warn << Shift_Next),
+            Message_Info  = (Info << Shift_Next),
+            Message_Debug = (Debug << Shift_Next),
+            Message_Trace = (Trace << Shift_Next),
+
+            Message_Next  = (Next << Shift_Next),
+            Message_All   = (All << Shift_Next)
+        };
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        Level(Enable enable = None): m_enable(enable) {}
+        Level(const Level& copy): m_enable(copy.m_enable) {}
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        inline Level& operator = (Enable enable) {
             m_enable = enable;
             return *this;
         }
         inline operator Enable() const { return m_enable; }
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
     protected:
         Enable m_enable;
     };
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     class EXPORT_CLASS Levels {
     public:
         enum {
+            Shift_Fatal = 1,
+            Shift_Error,
+            Shift_Warn,
+            Shift_Info,
+            Shift_Debug,
+            Shift_Trace,
+
+            Shift_Next
+        };
+        enum {
             None  = 0,
 
-            Fatal = ((1 << 1) - 1), 
-            Error = ((1 << 2) - 1), 
-            Warn  = ((1 << 3) - 1), 
-            Info  = ((1 << 4) - 1), 
-            Debug = ((1 << 5) - 1), 
-            Trace = ((1 << 6) - 1), 
+            Fatal = ((1 << Shift_Fatal) - 1),
+            Error = ((1 << Shift_Error) - 1),
+            Warn  = ((1 << Shift_Warn) - 1),
+            Info  = ((1 << Shift_Info) - 1),
+            Debug = ((1 << Shift_Debug) - 1),
+            Trace = ((1 << Shift_Trace) - 1),
 
-            Next  = ((1 << 7) - 1), 
-            All   = (Next)
+            Next  = ((1 << Shift_Next) - 1),
+            All   = (Next >> 1)
+        };
+        enum {
+            Message_None  = 0,
+
+            Message_Fatal = (Fatal << Shift_Next),
+            Message_Error = (Error << Shift_Next),
+            Message_Warn  = (Warn << Shift_Next),
+            Message_Info  = (Info << Shift_Next),
+            Message_Debug = (Debug << Shift_Next),
+            Message_Trace = (Trace << Shift_Next),
+
+            Message_All   = (All << Shift_Next)
         };
     };
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     class EXPORT_CLASS Location {
     public:
         Location
         (const char* functionName, const char* fileName, size_t lineNumber)
         : m_functionName(functionName),
           m_fileName(fileName), 
-          m_lineNumber(lineNumber)
-        {
+          m_lineNumber(lineNumber) {
         }
         Location
         (const Location& copy)
         : m_functionName(copy.m_functionName), 
           m_fileName(copy.m_fileName), 
-          m_lineNumber(copy.m_lineNumber)
-        {
+          m_lineNumber(copy.m_lineNumber) {
         }
         inline String getFunctionName() const { return m_functionName; }
         inline String getFileName() const { return m_fileName; }
@@ -122,6 +177,8 @@ public:
         size_t m_lineNumber;
     };
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     class EXPORT_CLASS Message: public String {
     public:
         Message& operator << (const Extends& str){ append(str); return *this; }
@@ -134,6 +191,8 @@ public:
         }
     };
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     class EXPORT_CLASS ClassName: public String {
     public:
         ClassName(const String& fullyQualifiedFunctionName) {
@@ -187,30 +246,65 @@ public:
         }
     };
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual ~Logger() {}
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual bool Init() = 0;
     virtual bool Fini() = 0;
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual void Log
     (const Level& level, const Message& message, const Location& location) = 0; 
-
     virtual void Log
     (const Level& level, const Location& location, const Message& message) = 0; 
-    virtual void LogFormatted
-    (const Level& level, const Location& location, const char* format, ...) = 0; 
-
     virtual void Log
     (const Level& level, const Message& message) = 0; 
+
+    virtual void LogFormatted
+    (const Level& level, const Location& location, const char* format, ...) = 0;
     virtual void LogFormatted
     (const Level& level, const char* format, ...) = 0; 
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual void LogFormatted
+    (const Level& level, const Message& message, const char* format, ...) {}
+
+    virtual void LogFormatted
+    (const Level& level, const Message& message,
+     const Location& location, const char* format, ...) {}
+    virtual void LogFormatted
+    (const Level& level, const Location& location,
+     const Message& message, const char* format, ...) {}
+
+    virtual void LogFormattedV
+    (const Level& level, const char* format, va_list va) {}
+
+    virtual void LogFormattedV
+    (const Level& level, const Location& location, const char* format, va_list va) {}
+    virtual void LogFormattedV
+    (const Level& level, const Message& message, const char* format, va_list va) {}
+
+    virtual void LogFormattedV
+    (const Level& level, const Message& message,
+     const Location& location, const char* format, va_list va) {}
+    virtual void LogFormattedV
+    (const Level& level, const Location& location,
+     const Message& message, const char* format, va_list va) {}
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual void EnableFor(const Level& level) = 0;
     virtual Level EnabledFor() const = 0;
     virtual bool IsEnabledFor(const Level& level) const = 0;
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     static Logger* GetDefault();
-
 protected:
     static void SetDefault(Logger* logger);
 };
@@ -298,6 +392,15 @@ if ((logger)?(logger->IsEnabledFor(level)):(false)) {\
 #define XOS_LOGGING_LEVELS_DEBUG ::xos::Logger::Levels::Debug
 #define XOS_LOGGING_LEVELS_TRACE ::xos::Logger::Levels::Trace
 
+#define XOS_LOGGING_LEVELS_MESSAGE_ALL ::xos::Logger::Levels::Message_All
+#define XOS_LOGGING_LEVELS_MESSAGE_NONE ::xos::Logger::Levels::Message_None
+#define XOS_LOGGING_LEVELS_MESSAGE_FATAL ::xos::Logger::Levels::Message_Fatal
+#define XOS_LOGGING_LEVELS_MESSAGE_ERROR ::xos::Logger::Levels::Message_Error
+#define XOS_LOGGING_LEVELS_MESSAGE_WARN ::xos::Logger::Levels::Message_Warn
+#define XOS_LOGGING_LEVELS_MESSAGE_INFO ::xos::Logger::Levels::Message_Info
+#define XOS_LOGGING_LEVELS_MESSAGE_DEBUG ::xos::Logger::Levels::Message_Debug
+#define XOS_LOGGING_LEVELS_MESSAGE_TRACE ::xos::Logger::Levels::Message_Trace
+
 #define XOS_LOG_FATAL(message) XOS_LOG(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Fatal, message)
 #define XOS_LOG_ERROR(message) XOS_LOG(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Error, message)
 #define XOS_LOG_WARN(message) XOS_LOG(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Warn, message)
@@ -312,12 +415,12 @@ if ((logger)?(logger->IsEnabledFor(level)):(false)) {\
 #define XOS_LOG_DEBUGF(message, ...) XOS_LOGF(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Debug, message, ##__VA_ARGS__)
 #define XOS_LOG_TRACEF(message, ...) XOS_LOGF(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Trace, message, ##__VA_ARGS__)
 
-#define XOS_LOG_MESSAGE_FATAL(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Fatal, message)
-#define XOS_LOG_MESSAGE_ERROR(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Error, message)
-#define XOS_LOG_MESSAGE_WARN(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Warn, message)
-#define XOS_LOG_MESSAGE_INFO(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Info, message)
-#define XOS_LOG_MESSAGE_DEBUG(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Debug, message)
-#define XOS_LOG_MESSAGE_TRACE(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Trace, message)
+#define XOS_LOG_MESSAGE_FATAL(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Fatal, message)
+#define XOS_LOG_MESSAGE_ERROR(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Error, message)
+#define XOS_LOG_MESSAGE_WARN(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Warn, message)
+#define XOS_LOG_MESSAGE_INFO(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Info, message)
+#define XOS_LOG_MESSAGE_DEBUG(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Debug, message)
+#define XOS_LOG_MESSAGE_TRACE(message) XOS_LOG_MESSAGE(XOS_DEFAULT_LOGGER, ::xos::Logger::Level::Message_Trace, message)
 
 // default logging levels
 //

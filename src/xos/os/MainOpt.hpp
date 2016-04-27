@@ -30,7 +30,47 @@
 
 #define XOS_MAIN_LOGGING_OPT "logging-level"
 #define XOS_MAIN_LOGGING_OPTARG_REQUIRED XOS_MAIN_OPT_ARGUMENT_REQUIRED
-#define XOS_MAIN_LOGGING_OPTARG "{(a)all|(n)none|(f)fatal|(e)error|(w)waring|(i)info|(d)debug|(t)trace}"
+#define XOS_MAIN_LOGGING_OPTARG_N_ALL '7'
+#define XOS_MAIN_LOGGING_OPTARG_N_NONE '0'
+#define XOS_MAIN_LOGGING_OPTARG_N_FATAL '1'
+#define XOS_MAIN_LOGGING_OPTARG_N_ERROR '2'
+#define XOS_MAIN_LOGGING_OPTARG_N_WARN '3'
+#define XOS_MAIN_LOGGING_OPTARG_N_INFO '4'
+#define XOS_MAIN_LOGGING_OPTARG_N_DEBUG '5'
+#define XOS_MAIN_LOGGING_OPTARG_N_TRACE '6'
+#define XOS_MAIN_LOGGING_OPTARG_C_ALL 'a'
+#define XOS_MAIN_LOGGING_OPTARG_C_NONE 'n'
+#define XOS_MAIN_LOGGING_OPTARG_C_FATAL 'f'
+#define XOS_MAIN_LOGGING_OPTARG_C_ERROR 'e'
+#define XOS_MAIN_LOGGING_OPTARG_C_WARN 'w'
+#define XOS_MAIN_LOGGING_OPTARG_C_INFO 'i'
+#define XOS_MAIN_LOGGING_OPTARG_C_DEBUG 'd'
+#define XOS_MAIN_LOGGING_OPTARG_C_TRACE 't'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_ALL 'A'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_NONE 'N'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_FATAL 'F'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_ERROR 'E'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_WARN 'W'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_INFO 'I'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_DEBUG 'D'
+#define XOS_MAIN_LOGGING_OPTARG_C_MESSAGE_TRACE 'T'
+#define XOS_MAIN_LOGGING_OPTARG_ALL "(a)all"
+#define XOS_MAIN_LOGGING_OPTARG_NONE "(n)none"
+#define XOS_MAIN_LOGGING_OPTARG_FATAL "(f)fatal"
+#define XOS_MAIN_LOGGING_OPTARG_ERROR "(e)error"
+#define XOS_MAIN_LOGGING_OPTARG_WARN "(w)waring"
+#define XOS_MAIN_LOGGING_OPTARG_INFO "(i)info"
+#define XOS_MAIN_LOGGING_OPTARG_DEBUG "(d)debug"
+#define XOS_MAIN_LOGGING_OPTARG_TRACE "(t)trace"
+#define XOS_MAIN_LOGGING_OPTARG "{" \
+    XOS_MAIN_LOGGING_OPTARG_ALL " | " \
+    XOS_MAIN_LOGGING_OPTARG_NONE " | " \
+    XOS_MAIN_LOGGING_OPTARG_FATAL " | " \
+    XOS_MAIN_LOGGING_OPTARG_ERROR " | " \
+    XOS_MAIN_LOGGING_OPTARG_WARN " | " \
+    XOS_MAIN_LOGGING_OPTARG_INFO " | " \
+    XOS_MAIN_LOGGING_OPTARG_DEBUG " | " \
+    XOS_MAIN_LOGGING_OPTARG_TRACE "}"
 #define XOS_MAIN_LOGGING_OPTUSE ""
 #define XOS_MAIN_LOGGING_OPTVAL_S "l:"
 #define XOS_MAIN_LOGGING_OPTVAL_C 'l'
@@ -60,6 +100,8 @@
     XOS_MAIN_LOGGING_OPTIONS_OPTION \
     XOS_MAIN_HELP_OPTIONS_OPTION
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 enum {
     XOS_MAIN_OPT_ARGUMENT_NONE     = 0,
     XOS_MAIN_OPT_ARGUMENT_REQUIRED = 1,
@@ -68,6 +110,8 @@ enum {
 
 namespace xos {
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 typedef int MainOptArgument;
 enum {
     MAIN_OPT_ARGUMENT_NONE     = XOS_MAIN_OPT_ARGUMENT_NONE,
@@ -75,8 +119,12 @@ enum {
     MAIN_OPT_ARGUMENT_OPTIONAL = XOS_MAIN_OPT_ARGUMENT_OPTIONAL
 };
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 int OnLoggingLevel(const char* optarg);
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 int OnLoggingOption
 (int optval, const char* optarg,
  const char* optname, int optind,
