@@ -1,0 +1,5 @@
+libWebRtc.a: ${LIBDIR}
+	@echo "Building Static Lib" $@ ...
+	@$(AR) $(ARFLAGS) $@ $(WEBRTC_INTERNAL_LIB_OBJS)
+	@$(MV) $@ $(LIBDIR)
+

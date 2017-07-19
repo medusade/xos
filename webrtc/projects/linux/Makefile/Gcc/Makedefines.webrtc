@@ -1,0 +1,271 @@
+########################################################################
+# Copyright 2012, Google Inc.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+#  1. Redistributions of source code must retain the above copyright notice,
+#     this list of conditions and the following disclaimer.
+#  2. Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  3. The name of the author may not be used to endorse or promote products
+#     derived from this software without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#   File: Makedefines.webrtc
+#
+# Author: $author$
+#   Date: 3/28/2012
+#
+# Linux Gcc Makedefines for webrtc
+########################################################################
+
+WEBRTC_REVISION_NUMBER = 1125
+WEBRTC_VERSION = webrtc-trunk-r-$(WEBRTC_REVISION_NUMBER)
+WEBRTC_ROOT = $(PKG)/../webrtc/$(WEBRTC_VERSION)
+WEBRTC_BUILD = $(WEBRTC_ROOT)/out/$(BUILD_TYPE)
+
+WEBRTC_LDFLAGS = \
+-pthread \
+-Wl,-z,noexecstack \
+-m32
+
+WEBRTC_CFLAGS_1 = \
+-fvisibility=hidden \
+-fno-exceptions \
+-fvisibility-inlines-hidden
+
+WEBRTC_CFLAGS = \
+-Werror \
+-pthread \
+-Wall \
+-Wno-unused-parameter \
+-Wno-missing-field-initializers \
+-D_FILE_OFFSET_BITS=64 \
+-pipe \
+-fPIC \
+-fno-strict-aliasing \
+-pthread \
+-m32 \
+-mmmx \
+-march=pentium4 \
+-msse2 \
+-mfpmath=sse \
+-O2 \
+-fno-ident \
+-fdata-sections \
+-ffunction-sections
+
+WEBRTC_CXXFLAGS = \
+-fno-threadsafe-statics \
+-Wsign-compare
+
+WEBRTC_DEFINES = \
+-DNO_HEAPCHECKER \
+-DCHROMIUM_BUILD \
+-DUSE_NSS=1 \
+-DTOOLKIT_USES_GTK=1 \
+-DENABLE_REMOTING=1 \
+-DENABLE_P2P_APIS=1 \
+-DENABLE_CONFIGURATION_POLICY \
+-DENABLE_INPUT_SPEECH \
+-DENABLE_GPU=1 \
+-DENABLE_EGLIMAGE=1 \
+-DUSE_SKIA=1 \
+-DENABLE_REGISTER_PROTOCOL_HANDLER=1 \
+-DWEBRTC_TARGET_PC \
+-DWEBRTC_LINUX \
+-DWEBRTC_THREAD_RR \
+-DFEATURE_ENABLE_SSL \
+-DFEATURE_ENABLE_VOICEMAIL \
+-DEXPAT_RELATIVE_PATH \
+-DWEBRTC_RELATIVE_PATH \
+-DLINUX \
+-DPOSIX \
+-D__STDC_FORMAT_MACROS \
+-DDYNAMIC_ANNOTATIONS_ENABLED=1 \
+-DWTF_USE_DYNAMIC_ANNOTATIONS=1 \
+-DWEBRTC_GEN_2_REVISION=1200 \
+-DWEBRTC_REVISION=$(WEBRTC_REVISION_NUMBER)
+
+WEBRTC_INTERNAL_INCLUDES = \
+-I${WEBRTC_ROOT} \
+-I${WEBRTC_ROOT}/src \
+-I${WEBRTC_ROOT}/third_party/libjingle/source \
+-I${WEBRTC_ROOT}/third_party_mods/libjingle/source \
+-I${WEBRTC_ROOT}/third_party/expat/files/lib
+
+WEBRTC_EXTERNAL_INCLUDES = \
+-I/usr/include/gtk-2.0 \
+-I/usr/lib/gtk-2.0/include \
+-I/usr/include/atk-1.0 \
+-I/usr/include/cairo \
+-I/usr/include/gdk-pixbuf-2.0 \
+-I/usr/include/pango-1.0 \
+-I/usr/include/gio-unix-2.0/ \
+-I/usr/include/glib-2.0 \
+-I/usr/lib/glib-2.0/include \
+-I/usr/include/pixman-1 \
+-I/usr/include/freetype2 \
+-I/usr/include/libpng12
+
+WEBRTC_INCLUDES = \
+$(WEBRTC_INTERNAL_INCLUDES) \
+$(WEBRTC_EXTERNAL_INCLUDES) \
+
+WEBRTC_LIBDIRS = \
+-L$(WEBRTC_BUILD)/obj.host/third_party \
+-L$(WEBRTC_BUILD)/obj.host/third_party/yasm \
+-L$(WEBRTC_BUILD)/obj.host/third_party/protobuf \
+-L$(WEBRTC_BUILD)/obj.target/src \
+-L$(WEBRTC_BUILD)/obj.target/src/modules \
+-L$(WEBRTC_BUILD)/obj.target/src/common_audio \
+-L$(WEBRTC_BUILD)/obj.target/src/common_video \
+-L$(WEBRTC_BUILD)/obj.target/src/voice_engine \
+-L$(WEBRTC_BUILD)/obj.target/src/video_engine \
+-L$(WEBRTC_BUILD)/obj.target/src/system_wrappers/source \
+-L$(WEBRTC_BUILD)/obj.target/third_party/libjpeg_turbo \
+-L$(WEBRTC_BUILD)/obj.target/third_party/libvpx \
+-L$(WEBRTC_BUILD)/obj.target/third_party/protobuf \
+-L$(WEBRTC_BUILD)/obj.target/third_party_mods/libjingle
+
+WEBRTC_INTERNAL_LIBS_A = \
+$(WEBRTC_BUILD)/obj.target/src/system_wrappers/source/libsystem_wrappers.a \
+$(WEBRTC_BUILD)/obj.host/third_party/yasm/libgenperf_libs.a \
+$(WEBRTC_BUILD)/obj.host/third_party/protobuf/libprotobuf_lite.a \
+$(WEBRTC_BUILD)/obj.host/third_party/protobuf/libprotobuf_full_do_not_use.a \
+$(WEBRTC_BUILD)/obj.target/third_party_mods/libjingle/libjingle_app.a \
+$(WEBRTC_BUILD)/obj.target/third_party_mods/libjingle/libjsoncpp.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libvideo_capture_module.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libwebrtc_utility.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaudio_coding_module.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libCNG.a \
+$(WEBRTC_BUILD)/obj.target/src/common_audio/libsignal_processing.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libG711.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libG722.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libiLBC.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libiSAC.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libiSACFix.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libPCM16B.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libNetEq.a \
+$(WEBRTC_BUILD)/obj.target/src/common_audio/libresampler.a \
+$(WEBRTC_BUILD)/obj.target/src/common_audio/libvad.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libwebrtc_video_coding.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libwebrtc_i420.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libwebrtc_vp8.a \
+$(WEBRTC_BUILD)/obj.target/third_party/libvpx/libvpx.a \
+$(WEBRTC_BUILD)/obj.target/src/common_video/libwebrtc_vplib.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libvideo_render_module.a \
+$(WEBRTC_BUILD)/obj.target/src/video_engine/libvideo_engine_core.a \
+$(WEBRTC_BUILD)/obj.target/src/common_video/libwebrtc_jpeg.a \
+$(WEBRTC_BUILD)/obj.target/third_party/libjpeg_turbo/libjpeg_turbo.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libmedia_file.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/librtp_rtcp.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libudp_transport.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libvideo_processing.a \
+$(WEBRTC_BUILD)/obj.target/src/voice_engine/libvoice_engine_core.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaudio_conference_mixer.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaudio_processing.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaec.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libapm_util.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaecm.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libagc.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libns.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaudioproc_debug_proto.a \
+$(WEBRTC_BUILD)/obj.target/third_party/protobuf/libprotobuf_lite.a \
+$(WEBRTC_BUILD)/obj.target/src/modules/libaudio_device.a \
+$(WEBRTC_BUILD)/obj.target/third_party_mods/libjingle/libjingle_p2p.a \
+$(WEBRTC_BUILD)/obj.target/third_party_mods/libjingle/libjingle.a
+
+L_WEBRTC_INTERNAL_LIBS = \
+-lgenperf_libs \
+-lprotobuf_lite \
+-lprotobuf_full_do_not_use \
+-ljingle_app \
+-ljsoncpp \
+-lvideo_capture_module \
+-lwebrtc_utility \
+-laudio_coding_module \
+-lCNG \
+-lsignal_processing \
+-lG711 \
+-lG722 \
+-liLBC \
+-liSAC \
+-liSACFix \
+-lPCM16B \
+-lNetEq \
+-lresampler \
+-lvad \
+-lsystem_wrappers \
+-lwebrtc_video_coding \
+-lwebrtc_i420 \
+-lwebrtc_vp8 \
+-lvpx \
+-lwebrtc_vplib \
+-lvideo_render_module \
+-lvideo_engine_core \
+-lwebrtc_jpeg \
+-ljpeg_turbo \
+-lmedia_file \
+-lrtp_rtcp \
+-ludp_transport \
+-lvideo_processing \
+-lvoice_engine_core \
+-laudio_conference_mixer \
+-laudio_processing \
+-laec \
+-lapm_util \
+-laecm \
+-lagc \
+-lns \
+-laudioproc_debug_proto \
+-lprotobuf_lite \
+-laudio_device \
+-ljingle_p2p \
+-ljingle
+
+WEBRTC_EXTERNAL_LIBS = \
+-lgtk-x11-2.0 \
+-lgdk-x11-2.0 \
+-latk-1.0 \
+-lgio-2.0 \
+-lpangoft2-1.0 \
+-lpangocairo-1.0 \
+-lgdk_pixbuf-2.0 \
+-lm \
+-lcairo \
+-lpng12 \
+-lpango-1.0 \
+-lfreetype \
+-lfontconfig \
+-lgobject-2.0 \
+-lgmodule-2.0 \
+-lgthread-2.0 \
+-lrt \
+-lglib-2.0 \
+-lX11 \
+-lXext \
+-lexpat \
+-ldl \
+-lasound \
+-lpulse
+
+WEBRTC_INTERNAL_LIBS = \
+$(WEBRTC_INTERNAL_LIBS_A)
+
+WEBRTC_LIBS = \
+$(WEBRTC_INTERNAL_LIBS) \
+$(WEBRTC_EXTERNAL_LIBS) \
+

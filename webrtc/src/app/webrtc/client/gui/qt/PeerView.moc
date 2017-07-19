@@ -1,0 +1,83 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'PeerView.hpp'
+**
+** Created: Mon Aug 19 07:29:21 2013
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include "PeerView.hpp"
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'PeerView.hpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.2. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_xos__app__webrtc__client__gui__qt__PeerView[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       2,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      45,   44,   44,   44, 0x09,
+      77,   72,   44,   44, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_xos__app__webrtc__client__gui__qt__PeerView[] = {
+    "xos::app::webrtc::client::gui::qt::PeerView\0"
+    "\0disconnectButtonReleased()\0item\0"
+    "itemDoubleClicked(QListWidgetItem*)\0"
+};
+
+const QMetaObject xos::app::webrtc::client::gui::qt::PeerView::staticMetaObject = {
+    { &PeerViewExtend::staticMetaObject, qt_meta_stringdata_xos__app__webrtc__client__gui__qt__PeerView,
+      qt_meta_data_xos__app__webrtc__client__gui__qt__PeerView, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &xos::app::webrtc::client::gui::qt::PeerView::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *xos::app::webrtc::client::gui::qt::PeerView::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *xos::app::webrtc::client::gui::qt::PeerView::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_xos__app__webrtc__client__gui__qt__PeerView))
+        return static_cast<void*>(const_cast< PeerView*>(this));
+    return PeerViewExtend::qt_metacast(_clname);
+}
+
+int xos::app::webrtc::client::gui::qt::PeerView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = PeerViewExtend::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: disconnectButtonReleased(); break;
+        case 1: itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 2;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

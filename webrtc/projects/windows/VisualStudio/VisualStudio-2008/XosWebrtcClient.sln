@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{68741F29-2FD6-4CC0-914F-BCB48A86D87E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{8942F11B-332B-4736-8817-4805D6783F74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Property Sheets", "Property Sheets", "{D0E5501C-740F-479E-A78A-FE332B7D6F57}"
+	ProjectSection(SolutionItems) = preProject
+		..\Xos-boost.vsprops = ..\Xos-boost.vsprops
+		..\Xos-log4cxx.vsprops = ..\Xos-log4cxx.vsprops
+		..\Xos-qt.vsprops = ..\Xos-qt.vsprops
+		Xos-vcversion.vsprops = Xos-vcversion.vsprops
+		..\Xos-webrtc2.vsprops = ..\Xos-webrtc2.vsprops
+		..\Xos.vsprops = ..\Xos.vsprops
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosWebrtcClient", "libXosWebrtcClient\libXosWebrtcClient.vcproj", "{41B1496C-2EE2-42A9-B901-7EAC95D84508}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosWebrtcCore", "libXosWebrtcCore\libXosWebrtcCore.vcproj", "{F7C0E24A-907F-4534-9AAD-51A693134876}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "console", "console", "{ED7533F5-F6DD-4DB9-8382-1E25F83BF6C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win", "win", "{3AFA5810-E68D-4A57-B052-5EF8E817269D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "winXosWebrtcClient", "winXosWebrtcClient\winXosWebrtcClient.vcproj", "{8551BC70-6674-4FD2-9C71-8996AFBEEAB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7C0E24A-907F-4534-9AAD-51A693134876} = {F7C0E24A-907F-4534-9AAD-51A693134876}
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508} = {41B1496C-2EE2-42A9-B901-7EAC95D84508}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XosWebrtcClient", "XosWebrtcClient\XosWebrtcClient.vcproj", "{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F7C0E24A-907F-4534-9AAD-51A693134876} = {F7C0E24A-907F-4534-9AAD-51A693134876}
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508} = {41B1496C-2EE2-42A9-B901-7EAC95D84508}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508}.Debug|Win32.ActiveCfg = Debug|Win32
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508}.Debug|Win32.Build.0 = Debug|Win32
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508}.Release|Win32.ActiveCfg = Release|Win32
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508}.Release|Win32.Build.0 = Release|Win32
+		{F7C0E24A-907F-4534-9AAD-51A693134876}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F7C0E24A-907F-4534-9AAD-51A693134876}.Debug|Win32.Build.0 = Debug|Win32
+		{F7C0E24A-907F-4534-9AAD-51A693134876}.Release|Win32.ActiveCfg = Release|Win32
+		{F7C0E24A-907F-4534-9AAD-51A693134876}.Release|Win32.Build.0 = Release|Win32
+		{8551BC70-6674-4FD2-9C71-8996AFBEEAB2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8551BC70-6674-4FD2-9C71-8996AFBEEAB2}.Debug|Win32.Build.0 = Debug|Win32
+		{8551BC70-6674-4FD2-9C71-8996AFBEEAB2}.Release|Win32.ActiveCfg = Release|Win32
+		{8551BC70-6674-4FD2-9C71-8996AFBEEAB2}.Release|Win32.Build.0 = Release|Win32
+		{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF}.Debug|Win32.Build.0 = Debug|Win32
+		{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF}.Release|Win32.ActiveCfg = Release|Win32
+		{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED7533F5-F6DD-4DB9-8382-1E25F83BF6C4} = {68741F29-2FD6-4CC0-914F-BCB48A86D87E}
+		{3AFA5810-E68D-4A57-B052-5EF8E817269D} = {68741F29-2FD6-4CC0-914F-BCB48A86D87E}
+		{41B1496C-2EE2-42A9-B901-7EAC95D84508} = {8942F11B-332B-4736-8817-4805D6783F74}
+		{F7C0E24A-907F-4534-9AAD-51A693134876} = {8942F11B-332B-4736-8817-4805D6783F74}
+		{369EA95A-0E5C-4B3B-B742-FFB537A0D1EF} = {ED7533F5-F6DD-4DB9-8382-1E25F83BF6C4}
+		{8551BC70-6674-4FD2-9C71-8996AFBEEAB2} = {3AFA5810-E68D-4A57-B052-5EF8E817269D}
+	EndGlobalSection
+EndGlobal
