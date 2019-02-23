@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="Xos-libwebsockets">
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBWEBSOCKETS_GROUP"
+        Value="thirdparty/libwebsockets"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_NAME"
+        Value="libwebsockets"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_VERSION"
+        Value=""
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_DIR"
+        Value="$(LIBWEBSOCKETS_GROUP)/$(LIBWEBSOCKETS_NAME)$(LIBWEBSOCKETS_VERSION)"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LIBWEBSOCKETS_DIR)"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LIBWEBSOCKETS_DIR)"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBWEBSOCKETS_BUILD"
+        Value="$(LIBWEBSOCKETS_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_OBJ"
+        Value="$(LIBWEBSOCKETS_BUILD)/obj"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_LIB"
+        Value="$(LIBWEBSOCKETS_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_BIN"
+        Value="$(LIBWEBSOCKETS_BUILD)/bin"
+    />
+
+    <UserMacro
+        Name="LIBWEBSOCKETS_DEFINES"
+        Value="_WINDOWS;CMAKE_BUILD"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_INCLUDE_DIRS"
+        Value="$(LIBWEBSOCKETS_SOURCE_DIR)/lib"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_LIB_DIRS"
+        Value="$(LIBWEBSOCKETS_LIB)"
+    />
+    <UserMacro
+        Name="LIBWEBSOCKETS_LIBS"
+        Value="libwebsockets.lib"
+    />
+
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>

@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCore", "libXosCore\libXosCore.vcxproj", "{1160DF34-4542-43AC-B485-13D75AEA3A1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{E12BACCD-548B-4068-B747-08121BBF5DF5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCoreShared", "libXosCoreShared\libXosCoreShared.vcxproj", "{A330A083-6DE9-49A2-AC4D-AA3D5543849B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{20726DC1-5A4E-43D5-9F20-43C0C3C90B06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "console", "console", "{5DF663EE-D35B-48B8-9B73-F9F5749A0BA2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XosHello", "XosHello\XosHello.vcxproj", "{EA931A28-F64C-4927-80DA-AB71E28F3E0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F} = {1160DF34-4542-43AC-B485-13D75AEA3A1F}
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F} = {BCEC1041-4476-4417-B33E-DE7ACAB79A7F}
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B} = {A330A083-6DE9-49A2-AC4D-AA3D5543849B}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Property Sheets", "Property Sheets", "{0E79CAA6-9B43-49E8-85BB-F36CBA64EBAB}"
+	ProjectSection(SolutionItems) = preProject
+		Xos-vcversion.props = Xos-vcversion.props
+		..\Xos.props = ..\Xos.props
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCoreWindows", "libXosCoreWindows\libXosCoreWindows.vcxproj", "{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Debug|Win32.Build.0 = Debug|Win32
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Debug|x64.ActiveCfg = Debug|x64
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Debug|x64.Build.0 = Debug|x64
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Release|Win32.ActiveCfg = Release|Win32
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Release|Win32.Build.0 = Release|Win32
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Release|x64.ActiveCfg = Release|x64
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F}.Release|x64.Build.0 = Release|x64
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Debug|Win32.Build.0 = Debug|Win32
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Debug|x64.ActiveCfg = Debug|Win32
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Release|Win32.ActiveCfg = Release|Win32
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Release|Win32.Build.0 = Release|Win32
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B}.Release|x64.ActiveCfg = Release|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Debug|Win32.Build.0 = Debug|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Debug|x64.ActiveCfg = Debug|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Release|Win32.ActiveCfg = Release|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Release|Win32.Build.0 = Release|Win32
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E}.Release|x64.ActiveCfg = Release|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Debug|Win32.Build.0 = Debug|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Debug|x64.ActiveCfg = Debug|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Release|Win32.ActiveCfg = Release|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Release|Win32.Build.0 = Release|Win32
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1160DF34-4542-43AC-B485-13D75AEA3A1F} = {E12BACCD-548B-4068-B747-08121BBF5DF5}
+		{A330A083-6DE9-49A2-AC4D-AA3D5543849B} = {E12BACCD-548B-4068-B747-08121BBF5DF5}
+		{BCEC1041-4476-4417-B33E-DE7ACAB79A7F} = {E12BACCD-548B-4068-B747-08121BBF5DF5}
+		{5DF663EE-D35B-48B8-9B73-F9F5749A0BA2} = {20726DC1-5A4E-43D5-9F20-43C0C3C90B06}
+		{EA931A28-F64C-4927-80DA-AB71E28F3E0E} = {5DF663EE-D35B-48B8-9B73-F9F5749A0BA2}
+	EndGlobalSection
+EndGlobal

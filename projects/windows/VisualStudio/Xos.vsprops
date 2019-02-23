@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--===============================================-->
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Xos"
+	>
+    
+    <!--===============================================-->
+    
+    <UserMacro
+		Name="SOURCE_ROOT_DIR"
+		Value="../../../../../.."
+	/>
+    
+    <UserMacro
+		Name="SOURCE_BUILD_DIR"
+		Value="$(SOURCE_ROOT_DIR)"
+	/>
+    
+    <UserMacro
+		Name="SOURCE_BUILD"
+		Value="$(SOURCE_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+	/>
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="XAW_GROUP"
+        Value="thirdparty/libx11/Xaw"
+    />
+    <UserMacro
+        Name="XAW_NAME"
+        Value="libXaw"
+    />
+    <UserMacro
+        Name="XAW_VERSION"
+        Value="1.0.4"
+    />
+    <UserMacro
+        Name="XAW_DIR"
+        Value="$(XAW_GROUP)/$(XAW_NAME)-$(XAW_VERSION)"
+    />
+    <UserMacro
+        Name="XAW_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(XAW_DIR)"
+    />
+    <UserMacro
+        Name="XAW_INCLUDE_DIRS"
+        Value="$(XAW_SOURCE_DIR)/include"
+    />
+    <UserMacro
+		Name="XOS_XAW_INCLUDE_DIRS"
+		Value="$(XAW_INCLUDE_DIRS)"
+	/>
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LESSTIF_GROUP"
+        Value="thirdparty/libx11/lesstif"
+    />
+    <UserMacro
+        Name="LESSTIF_NAME"
+        Value="lesstif"
+    />
+    <UserMacro
+        Name="LESSTIF_VERSION"
+        Value="0.95.2"
+    />
+    <UserMacro
+        Name="LESSTIF_DIR"
+        Value="$(LESSTIF_GROUP)/$(LESSTIF_NAME)-$(LESSTIF_VERSION)"
+    />
+    <UserMacro
+        Name="LESSTIF_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LESSTIF_DIR)"
+    />
+    <UserMacro
+        Name="LESSTIF_INCLUDE_DIRS"
+        Value="$(LESSTIF_SOURCE_DIR)/include/Motif-2.1"
+    />
+    <UserMacro
+		Name="XOS_XM_INCLUDE_DIRS"
+		Value="$(LESSTIF_INCLUDE_DIRS)"
+	/>
+
+    <!--===============================================-->
+    
+    <UserMacro
+		Name="XOS_GROUP"
+		Value=""
+	/>
+    <UserMacro
+		Name="XOS_NAME"
+		Value="Xos"
+	/>
+    <UserMacro
+		Name="XOS_VERSION"
+		Value=""
+	/>
+    <UserMacro
+		Name="XOS_DIR"
+		Value="$(XOS_GROUP)$(XOS_NAME)$(XOS_VERSION)"
+	/>
+
+    <UserMacro
+		Name="XOS_SOURCE_DIR"
+		Value="$(SOURCE_ROOT_DIR)/$(XOS_DIR)/src"
+	/>
+    <UserMacro
+		Name="XOS_BUILD_DIR"
+		Value="$(SOURCE_ROOT_DIR)/$(XOS_DIR)/build"
+	/>
+	
+    <UserMacro
+		Name="XOS_BUILD"
+		Value="$(XOS_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+	/>
+    <UserMacro
+		Name="XOS_OBJ"
+		Value="$(XOS_BUILD)/obj/$(ProjectName)"
+	/>
+    <UserMacro
+		Name="XOS_LIB"
+		Value="$(XOS_BUILD)/lib"
+	/>
+    <UserMacro
+		Name="XOS_BIN"
+		Value="$(XOS_BUILD)/bin"
+	/>
+	
+    <UserMacro
+		Name="XOS_DEFINES"
+		Value="WINSOCK_2"
+	/>
+    <UserMacro
+		Name="XOS_X11_INCLUDE_DIRS"
+		Value="$(XOS_XM_INCLUDE_DIRS);$(XOS_XAW_INCLUDE_DIRS);$(XOS_SOURCE_DIR)/thirdparty/xorg"
+	/>
+    <UserMacro
+		Name="XOS_WINDOWS_INCLUDE_DIRS"
+		Value="$(XOS_SOURCE_DIR)/platform/windows/cocoa;$(XOS_SOURCE_DIR)/platform/windows/unix;$(XOS_SOURCE_DIR)/platform/windows/linux/include;$(XOS_SOURCE_DIR)/platform/windows/macosx"
+	/>
+    <UserMacro
+		Name="XOS_INCLUDE_DIRS"
+		Value="$(XOS_WINDOWS_INCLUDE_DIRS);$(XOS_X11_INCLUDE_DIRS);$(XOS_SOURCE_DIR)/thirdparty/gnu/getopt;$(XOS_SOURCE_DIR)/thirdparty/linux/include;$(XOS_SOURCE_DIR)"
+	/>
+    <UserMacro
+		Name="XOS_LIB_DIRS"
+		Value="$(XOS_LIB)"
+	/>
+    <UserMacro
+		Name="XOS_LIBS"
+		Value="ws2_32.lib"
+	/>
+	
+    <!--===============================================-->
+    
+</VisualStudioPropertySheet>

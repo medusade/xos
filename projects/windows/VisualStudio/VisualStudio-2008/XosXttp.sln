@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Property Sheets", "Property Sheets", "{B0051A79-373D-419B-9C54-3CADDE9F651E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Xos-boost.vsprops = ..\Xos-boost.vsprops
+		..\Xos-log4cxx.vsprops = ..\Xos-log4cxx.vsprops
+		Xos-vcversion.vsprops = Xos-vcversion.vsprops
+		..\Xos.vsprops = ..\Xos.vsprops
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{901C0376-AD6F-44A7-A149-D8CD05D1F5CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{5AA98558-F539-4AA2-8D81-CDFB19A310C6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCore", "libXosCore\libXosCore.vcproj", "{BAE70CE2-8375-412E-8274-A4FB4F895239}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosCoreWindows", "libXosCoreWindows\libXosCoreWindows.vcproj", "{4D1DE82C-9336-4DD6-9816-196E14754393}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXosXttp", "libXosXttp\libXosXttp.vcproj", "{21E25B14-8324-4EF8-A15A-3BE9A5C5368B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Debug|Win32.Build.0 = Debug|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Release|Win32.ActiveCfg = Release|Win32
+		{BAE70CE2-8375-412E-8274-A4FB4F895239}.Release|Win32.Build.0 = Release|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Debug|Win32.Build.0 = Debug|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Release|Win32.ActiveCfg = Release|Win32
+		{4D1DE82C-9336-4DD6-9816-196E14754393}.Release|Win32.Build.0 = Release|Win32
+		{21E25B14-8324-4EF8-A15A-3BE9A5C5368B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21E25B14-8324-4EF8-A15A-3BE9A5C5368B}.Debug|Win32.Build.0 = Debug|Win32
+		{21E25B14-8324-4EF8-A15A-3BE9A5C5368B}.Release|Win32.ActiveCfg = Release|Win32
+		{21E25B14-8324-4EF8-A15A-3BE9A5C5368B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BAE70CE2-8375-412E-8274-A4FB4F895239} = {5AA98558-F539-4AA2-8D81-CDFB19A310C6}
+		{4D1DE82C-9336-4DD6-9816-196E14754393} = {5AA98558-F539-4AA2-8D81-CDFB19A310C6}
+		{21E25B14-8324-4EF8-A15A-3BE9A5C5368B} = {5AA98558-F539-4AA2-8D81-CDFB19A310C6}
+	EndGlobalSection
+EndGlobal

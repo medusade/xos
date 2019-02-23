@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="mongoose">
+    
+    <!--===============================================-->
+    
+    <UserMacro
+        Name="MONGOOSE_GROUP"
+        Value="thirdparty/mongoose"
+    />
+    <UserMacro
+        Name="MONGOOSE_NAME"
+        Value="mongoose"
+    />
+    <UserMacro
+        Name="MONGOOSE_VERSION"
+        Value=""
+    />
+    <UserMacro
+        Name="MONGOOSE_DIR"
+        Value="$(MONGOOSE_GROUP)/$(MONGOOSE_NAME)$(MONGOOSE_VERSION)"
+    />
+    <UserMacro
+        Name="MONGOOSE_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(MONGOOSE_DIR)"
+    />
+    <UserMacro
+        Name="MONGOOSE_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(MONGOOSE_DIR)"
+    />
+    
+    <!--===============================================-->
+
+    <UserMacro
+        Name="MONGOOSE_BUILD"
+        Value="$(MONGOOSE_BUILD_DIR)/build/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="MONGOOSE_OBJ"
+        Value="$(MONGOOSE_BUILD)/obj"
+    />
+    <UserMacro
+        Name="MONGOOSE_LIB"
+        Value="$(MONGOOSE_BUILD)/lib"
+    />
+    <UserMacro
+        Name="MONGOOSE_BIN"
+        Value="$(MONGOOSE_BUILD)/bin"
+    />
+    
+    <UserMacro
+        Name="MONGOOSE_INCLUDE_DIRS"
+        Value="$(MONGOOSE_SOURCE_DIR)"
+    />
+    <UserMacro
+        Name="MONGOOSE_LIB_DIRS"
+        Value="$(MONGOOSE_LIB)"
+    />
+    <UserMacro
+        Name="MONGOOSE_LIBS"
+        Value="libmongoose.lib"
+    />
+    
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>
